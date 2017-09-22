@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import RangePicker from '../components/RangePicker'
+
+const data = [1, 3, 4, 10, 8, 7, 5, 6, 7, 1, 2, 3, 4, 5, 7, 8]
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
@@ -10,9 +12,7 @@ export default class LinksScreen extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
+        <RangePicker data={data} />
       </ScrollView>
     );
   }

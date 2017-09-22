@@ -14,6 +14,7 @@ export default class HomeScreen extends React.Component {
   handlePress(num) {
     console.log(num)
   }
+  
   renderButtons() {
     return Array.from(Array(10).keys()).map(number => {
       const num = number + 1
