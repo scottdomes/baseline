@@ -9,6 +9,7 @@ import {
   View
 } from 'react-native'
 import Button from '../components/Button'
+import { COLORS } from '../components/Theme'
 
 export default class HomeScreen extends React.Component {
   handlePress(num) {
@@ -24,7 +25,8 @@ export default class HomeScreen extends React.Component {
           onPress={this.handlePress.bind(this, num)}
           label={`${num}`}
           color="#FFFFFF"
-          backgroundColor="#baffc9"
+          style={{ opacity: .75 }}
+          backgroundColor={COLORS[number]}
           accessibilityLabel={`Choose rating of ${num}`}
         />
       )

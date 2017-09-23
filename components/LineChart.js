@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, Animated, SegmentedControlIOS } from 'react-native'
+import { COLORS } from './Theme'
 
 const MULTIPLIER = 20
-const COLORS = ['#ffb3ba', '#ffb3ba','#c0392b', '#e74c3c', '#e67e22', '#d35400', '#f1c40f', '#f39c12', '#2ecc71', '#27ae60']
 
 export default class LineChart extends React.Component {
   constructor(props) {
@@ -65,6 +65,7 @@ const styles = {
   },
   bar: {
     flex: 1,
+    opacity: .75,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10
   }
