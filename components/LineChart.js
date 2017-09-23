@@ -1,6 +1,9 @@
 import React from 'react'
 import { View, Text, Animated, SegmentedControlIOS } from 'react-native'
 
+const MULTIPLIER = 20
+const COLORS = ['#ffb3ba', '#ffb3ba','#c0392b', '#e74c3c', '#e67e22', '#d35400', '#f1c40f', '#f39c12', '#2ecc71', '#27ae60']
+
 export default class LineChart extends React.Component {
   constructor(props) {
     super(props)
@@ -11,7 +14,7 @@ export default class LineChart extends React.Component {
 
   componentDidMount() {
     const anims = this.state.heights.map((h, i) => {
-        return Animated.spring(h, { toValue: this.props.dataPoints[i] })
+        return Animated.spring(h, { toValue: this.props.dataPoints[i] * MULTIPLIER })
       })
     Animated.parallel(anims).start()
   }
@@ -22,7 +25,7 @@ export default class LineChart extends React.Component {
         heights: next.dataPoints.map(() => new Animated.Value(1))
       }, () => {
         const anims = this.state.heights.map((h, i) => {
-          return Animated.spring(h, { toValue: next.dataPoints[i] })
+          return Animated.spring(h, { toValue: next.dataPoints[i] * MULTIPLIER })
         })
         Animated.parallel(anims).start()
       })
@@ -34,10 +37,11 @@ export default class LineChart extends React.Component {
     const { heights } = this.state
     return heights.map((height, i) => {
       if (height._value > 0) {
+        const background = COLORS[this.props.dataPoints[i] - 1] || '#ffffba'
         return (
           <Animated.View
             key={i}
-            style={[{ height: height, flex: 1 }, styles.bar]}
+            style={[{ height: height, flex: 1, backgroundColor: background }, styles.bar]}
           />
         )
       } else {
@@ -54,15 +58,14 @@ export default class LineChart extends React.Component {
 const styles = {
   dataContainer: {
     justifyContent: 'space-around',
+    alignItems: 'flex-end',
     flex: 1,
     flexDirection: 'row',
-    height: 50
+    height: 200
   },
   bar: {
     flex: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    width: 5,
-    backgroundColor: 'green'
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10
   }
 }

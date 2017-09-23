@@ -2,7 +2,7 @@ import React from 'react';
 import { View, SegmentedControlIOS } from 'react-native';
 import LineChart from '../components/LineChart'
 
-const DATE_OPTIONS_NUMS = [14, 10, 5]
+const DATE_OPTIONS_NUMS = [365, 90, 30, 7]
 const DATE_OPTIONS_STRINGS = DATE_OPTIONS_NUMS.map(num => `${num} Days`)
 
 export default class RangePicker extends React.Component {
@@ -16,7 +16,14 @@ export default class RangePicker extends React.Component {
 
   getData(dataPoints, currentIndex) {
     const range = DATE_OPTIONS_NUMS[currentIndex]
-    return dataPoints.slice(Math.max(dataPoints.length - range, 1))
+    const arr = dataPoints.slice(Math.max(dataPoints.length - range, 1))
+    let properLength = undefined
+    const missingLength = range - arr.length
+    if (missingLength > 0) {
+      const filler = Array.from(Array(missingLength).keys()).map(num => .1)
+      properLength = filler.concat(arr)
+    }
+    return properLength || arr
   }
 
   render() {
