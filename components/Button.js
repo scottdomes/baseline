@@ -3,9 +3,9 @@ import { TouchableOpacity, Text, View } from 'react-native'
 
 export default function Button({ label, onPress, backgroundColor, color, style }) {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.touchable}>
-      <View backgroundColor={backgroundColor} style={[styles.container, style]}>
-        <Text style={styles.text} color={color}>{label}</Text>
+    <TouchableOpacity onPress={onPress} style={[styles.touchable, style]}>
+      <View backgroundColor={backgroundColor} style={[styles.container]}>
+        <Text style={[styles.text, { color: color, backgroundColor: 'transparent' }]}>{label}</Text>
       </View>
     </TouchableOpacity>
   )

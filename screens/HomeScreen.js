@@ -6,26 +6,41 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  LayoutAnimation
 } from 'react-native'
-import Button from '../components/Button'
+import AnimatedButton from '../components/AnimatedButton'
 import { COLORS } from '../components/Theme'
 
 export default class HomeScreen extends React.Component {
-  handlePress(num) {
-    console.log(num)
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedButtonIndex: null
+    }
+  }
+
+  handlePress(selectedButtonIndex) {
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    if (this.state.selectedButtonIndex === selectedButtonIndex) {
+      this.setState({ selectedButtonIndex: null })
+    } else {
+      this.setState({ selectedButtonIndex })
+    }
   }
   
   renderButtons() {
     return Array.from(Array(10).keys()).map(number => {
       const num = number + 1
+      const isSelected = this.state.selectedButtonIndex === number
       return (
-        <Button
+        <AnimatedButton
+          isSelected={isSelected}
           key={`button${num}`}
-          onPress={this.handlePress.bind(this, num)}
+          onPress={this.handlePress.bind(this, number)}
           label={`${num}`}
-          color="#FFFFFF"
-          style={{ opacity: .75 }}
+          color="#000000"
+          style={style}
           backgroundColor={COLORS[number]}
           accessibilityLabel={`Choose rating of ${num}`}
         />
